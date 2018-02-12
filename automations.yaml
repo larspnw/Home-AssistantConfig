@@ -1,0 +1,48 @@
+- action:
+  - alias: ''
+    data:
+      entity_id: switch.plug1
+    service: switch.turn_on
+  alias: Family room light on at sunset
+  condition: []
+  id: '1518368351969'
+  trigger:
+  - event: sunset
+    platform: sun
+- action:
+  - data:
+      entity_id: switch.plug1
+    service: switch.turn_off
+  alias: Family room light off at midnight
+  condition: []
+  id: '1518380606641'
+  trigger:
+  - at: '23:59'
+    platform: time
+- action:
+  - data:
+      entity_id: light.hue_white_lamp_2
+    service: light.turn_on
+  - data:
+      entity_id: light.hue_white_lamp_1
+    service: light.turn_on
+  alias: Garage lights on at sunset + offset
+  condition: []
+  id: '1518386340245'
+  trigger:
+  - event: sunset
+    offset: 00:45:00
+    platform: sun
+- action:
+  - data:
+      entity_id: light.hue_white_lamp_2
+    service: light.turn_off
+  - data:
+      entity_id: light.hue_white_lamp_1
+    service: light.turn_off
+  alias: Garage lights off at sunrise
+  condition: []
+  id: '1518386813532'
+  trigger:
+  - event: sunrise
+    platform: sun

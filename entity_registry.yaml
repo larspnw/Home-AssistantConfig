@@ -1,0 +1,12 @@
+media_player.kitchen:
+  platform: sonos
+  unique_id: RINCON_5CAAFD52350C01400
+switch.plug1:
+  platform: wemo
+  unique_id: 221736K0106FD7
+light.hue_white_lamp_1:
+  platform: hue
+  unique_id: 00:17:88:01:02:c7:47:52-0b
+light.hue_white_lamp_2:
+  platform: hue
+  unique_id: 00:17:88:01:02:c7:5b:d5-0b
