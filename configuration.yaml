@@ -14,7 +14,7 @@ homeassistant:
   customize: !include customize.yaml
 
 # Show links to resources in log and frontend
-introduction: off
+#introduction: 
 
 # Enables the frontend
 frontend:
@@ -70,6 +70,18 @@ tts:
 # Cloud
 cloud:
 
+# dropcam/nest
+nest:
+  client_id: e6e48283-30a6-494c-87f5-c9e38f120294
+  client_secret: lewTwJOPc7NjLcyurvmgU0IgO
+  
+#notify pushbullet
+notify:
+  - name: NOTIFY_LARRY
+    platform: pushbullet
+    api_key: o.OnW9S2N4fcGVJ0KXxOf3IPCHgpPtpTcu
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+

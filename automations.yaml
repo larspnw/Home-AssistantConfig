@@ -26,12 +26,19 @@
   - data:
       entity_id: light.hue_white_lamp_1
     service: light.turn_on
+  - data:
+      entity_id: media_player.kitchen_speaker
+      message: Hey there, Hass turned on the outside lights
+    service: tts.google_say
+  - data:
+      message: The garage lights have turned on
+    service: notify.notify_larry
   alias: Garage lights on at sunset + offset
   condition: []
   id: '1518386340245'
   trigger:
   - event: sunset
-    offset: 00:45:00
+    offset: 00:30:00
     platform: sun
 - action:
   - data:
@@ -46,3 +53,39 @@
   trigger:
   - event: sunrise
     platform: sun
+- action:
+  - data:
+      entity_id: media_player.kitchen_speaker
+      message: There was motion detected
+    service: tts.google_say
+  - data:
+      message: Motion has been detected
+    service: notify.notify_larry
+  alias: Motion detected
+  condition: []
+  id: '1519065133237'
+  trigger:
+  - entity_id: binary_sensor.entryway_camera_larscam1_motion_detected
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      message: HASS has started
+    service: notify.notify_larry
+  alias: HASS has started
+  condition: []
+  id: '1519067307505'
+  trigger:
+  - event: start
+    platform: homeassistant
+- action:
+  - data:
+      message: HASS has shutdown
+    service: notify.notify_larry
+  alias: HASS has stopped
+  condition: []
+  id: '1519067351610'
+  trigger:
+  - event: shutdown
+    platform: homeassistant
