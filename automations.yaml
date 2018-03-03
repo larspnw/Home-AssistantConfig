@@ -30,15 +30,12 @@
       entity_id: media_player.kitchen_speaker
       message: Hey there, Hass turned on the outside lights
     service: tts.google_say
-  - data:
-      message: The garage lights have turned on
-    service: notify.notify_larry
   alias: Garage lights on at sunset + offset
   condition: []
   id: '1518386340245'
   trigger:
   - event: sunset
-    offset: 00:30:00
+    offset: 00:15:00
     platform: sun
 - action:
   - data:
@@ -89,3 +86,53 @@
   trigger:
   - event: shutdown
     platform: homeassistant
+- action:
+  - data:
+      message: Home Assistant update is now available.
+    service: notify.notify_larry
+  alias: HASS update available
+  condition: []
+  id: '1519961333155'
+  trigger:
+  - platform: template
+    value_template: "{% set latest_version = states.sensor.web_scrape.state %}\n{%\
+      \ set latest_value = latest_version.split(\" \")[2] %}\n{% set current_value\
+      \ = states.sensor.current_version.state %}\n{% if latest_value == current_value\
+      \ %}\n  true\n{% else %}\n  false\n{% endif %}"
+- action:
+  - data:
+      message: 'Pollen will be bad today: {{ states.sensor.allergy_index_today.state
+        }} with rating: {{ states.sensor.allergy_index_today.attributes.rating }} '
+    service: notify.notify_larry
+  alias: Pollen monitor
+  condition:
+  - above: '7.2'
+    condition: numeric_state
+    entity_id: sensor.allergy_index_today
+  id: '1519968685186'
+  trigger:
+  - event: sunrise
+    platform: sun
+- action:
+  - data:
+      message: "Weather forecast- today: {{ states.sensor.pws_weather_1d.state }}\n\
+        \ tomorrow: {{ states.sensor.pws_weather_2d.state }}"
+    service: notify.notify_larry
+  alias: Weather forecast
+  condition: []
+  id: '1519971358060'
+  trigger:
+  - event: sunrise
+    platform: sun
+- action:
+  - data:
+      message: Xbox is online
+    service: notify.notify_larry
+  alias: xbox is on
+  condition: []
+  id: '1519972532595'
+  trigger:
+  - entity_id: sensor.lars01pnw
+    from: 'off'
+    platform: state
+    to: 'on'

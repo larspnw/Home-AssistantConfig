@@ -1,0 +1,4 @@
+switch.plug1:
+  friendly_name: Switch in garage - fan
+sensor.lars01pnw:
+  friendly_name: xbox - lars01pnw

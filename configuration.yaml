@@ -24,7 +24,10 @@ config:
 
 http:
   # Secrets are defined in the file secrets.yaml
-  # api_password: !secret http_password
+  api_password: !secret http_password
+  #ssl_certificate: /ssl/.home-assistant/certificate.pem
+  #ssl_key: /ssl/.home-assistant/privkey.pem
+
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
 
@@ -59,9 +62,42 @@ map:
 # Track the sun
 sun:
 
+# SENSORS
 # Weather prediction
 sensor:
   - platform: yr
+  
+  - platform: version
+
+  - platform: scrape
+    resource: https://home-assistant.io
+    name: Release
+    select: ".current-version h1"
+    value_template: '{{ value.split(":")[1] }}'
+
+# Pollen 
+  - platform: pollen
+    zip_code: "98074"
+    monitored_conditions:
+      - allergy_average_forecasted
+      #- allergy_average_historical
+      - allergy_index_today
+      - allergy_index_tomorrow
+      - allergy_index_yesterday
+      #- disease_average_forecasted
+
+#xbox API
+  - platform: xbox_live
+    api_key: !secret xbox_apikey 
+    xuid: !secret xbox_xuid 
+    scan_interval: 60
+
+# wunderground
+  - platform: wunderground
+    api_key: !secret wu_apikey 
+    monitored_conditions:
+      - weather_1d
+      - weather_2d
 
 # Text to speech
 tts:
@@ -72,14 +108,14 @@ cloud:
 
 # dropcam/nest
 nest:
-  client_id: e6e48283-30a6-494c-87f5-c9e38f120294
-  client_secret: lewTwJOPc7NjLcyurvmgU0IgO
+  client_id: !secret nest_clientid 
+  client_secret: !secret nest_secret 
   
 #notify pushbullet
 notify:
   - name: NOTIFY_LARRY
     platform: pushbullet
-    api_key: o.OnW9S2N4fcGVJ0KXxOf3IPCHgpPtpTcu
+    api_key: !secret pushbullet_apikey 
 
 group: !include groups.yaml
 automation: !include automations.yaml
