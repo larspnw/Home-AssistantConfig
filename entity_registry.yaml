@@ -10,3 +10,27 @@ light.hue_white_lamp_1:
 light.hue_white_lamp_2:
   platform: hue
   unique_id: 00:17:88:01:02:c7:5b:d5-0b
+media_player.kitchen_speaker:
+  platform: cast
+  unique_id: 0ad334fb-8ce3-b06b-1235-d7ed2cbde57e
+media_player.bedroom_speaker:
+  platform: cast
+  unique_id: 2c0dff03-4d1f-d8f3-8a6e-74188e225be3
+sensor.allergy_index_tomorrow:
+  platform: pollen
+  unique_id: 98074_allergy_index_tomorrow
+sensor.allergy_index_historical_average:
+  platform: pollen
+  unique_id: 98074_allergy_index_historical_average
+sensor.cold__flu_forecasted_average:
+  platform: pollen
+  unique_id: 98074_cold__flu_forecasted_average
+sensor.allergy_index_forecasted_average:
+  platform: pollen
+  unique_id: 98074_allergy_index_forecasted_average
+sensor.allergy_index_yesterday:
+  platform: pollen
+  unique_id: 98074_allergy_index_yesterday
+sensor.allergy_index_today:
+  platform: pollen
+  unique_id: 98074_allergy_index_today
